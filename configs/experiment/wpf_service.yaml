@@ -1,0 +1,51 @@
+# @package _global_
+
+# to execute this experiment run:
+# python train.py experiment=example
+
+defaults:
+  - override /datamodule: wpf.yaml
+  - override /model: wpf.yaml
+  - override /callbacks: wpf.yaml
+  - override /logger: wandb
+  - override /trainer: wpf.yaml
+
+# all parameters below will be merged with parameters from default configurations set above
+# this allows you to overwrite only specified parameters
+
+# name of the run determines folder name in logs
+name: "wpf_baseline_gru_service"
+
+seed: 1234
+
+trainer:
+  gpus: 1
+  min_epochs: 1
+  max_epochs: 15
+#  gradient_clip_val: 0.5
+
+model:
+  lr: 0.0001
+  weight_decay: 0
+  task: ${task}
+  train_bar: False
+  val_bar: False
+  test_bar: False
+  net:
+    input_dim: 10
+    hidden_dim: 48
+    output_len: 288
+    output_dim: 1
+    dropout: 0.05
+    lstm_layer: 2
+
+datamodule:
+  batch_size: 256
+
+callbacks:
+  early_stopping:
+    patience: 3
+
+logger:
+  wandb:
+    tags: ["wpf_service", "${name}"]

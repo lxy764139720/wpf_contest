@@ -1,0 +1,16 @@
+_target_: src.models.wpf_module.WPFModule
+lr: 0.0001
+weight_decay: 0
+task: ${task}
+train_bar: True
+val_bar: True
+test_bar: True
+
+net:
+  _target_: src.models.components.gru.GRUNet
+  input_dim: 10
+  hidden_dim: 48
+  output_len: 288
+  output_dim: 1
+  dropout: 0.05
+  lstm_layer: 2

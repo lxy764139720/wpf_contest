@@ -1,0 +1,20 @@
+_target_: src.datamodules.wpf_datamodule.WPFDataModule
+
+data_dir: ${data_dir} # data_dir is specified in config.yaml
+feature_file: "sdwpf_baidukddcup2022_full.CSV"
+position_file: "sdwpf_baidukddcup2022_turb_location.CSV"
+batch_size: 32
+num_workers: 0
+pin_memory: False
+day_len: 144
+train_days: 153
+val_days: 16
+test_days: 15
+total_days: 184
+turbine_id: ${turbine_id}
+task: ${task}
+target: ${target}
+scale: True
+start_col: 3
+input_len: ${input_len}
+output_len: ${output_len}
