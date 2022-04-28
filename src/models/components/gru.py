@@ -9,7 +9,7 @@ class GRUNet(nn.Module):
         hidden_dim: int = 48,
         output_len: int = 288,
         output_dim: int = 1,
-        dropout: int = 0.05,
+        dropout: int = 0.01,
         lstm_layer: int = 2,
     ):
         super().__init__()
