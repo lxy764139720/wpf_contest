@@ -14,9 +14,8 @@ class LSTMModel(torch.nn.Module):
         self.lstm = torch.nn.LSTM(input_size=input_dim, hidden_size=hidden_dim, num_layers=lstm_layer, batch_first=True,
                                   bidirectional=True)
         self.projection = torch.nn.Linear(hidden_dim * 2, output_dim)
-        self.relu = torch.nn.ReLU()
 
     def forward(self, x):
         dec, _ = self.lstm(x)
         pred = self.projection(self.dropout(dec[:, -1, :]))
-        return self.clamp(pred, min=0, max=52)
+        return torch.clamp(pred, min=0, max=52)
